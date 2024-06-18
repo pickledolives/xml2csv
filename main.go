@@ -204,7 +204,7 @@ func getValue(row *xmlquery.Node, valuePath string, useEvaluate bool) (string, e
 	if values == nil {
 		return "", nil
 	}
-	result := make([]string len(values))
+	result := make([]string, len(values))
 	for i, value := range values {
 		result[i] = value.InnerText()
 	}
