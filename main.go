@@ -237,7 +237,11 @@ func parseXML(path string) (*xmlquery.Node, error) {
 	}
 	defer reader.Close()
 
-	return xmlquery.Parse(reader)
+	return xmlquery.ParseWithOptions(r, ParserOptions{
+		Decoder: &xmlquery.DecoderOptions{
+			Strict: false,
+		},
+	})
 }
 
 func findXML(path string) ([]string, error) {
