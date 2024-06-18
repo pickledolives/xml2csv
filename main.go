@@ -196,16 +196,20 @@ func getValue(row *xmlquery.Node, valuePath string, useEvaluate bool) (string, e
 	}
 
 	// Nodeを返す場合
-	value, err := xmlquery.Query(row, valuePath)
+	values, err := xmlquery.QueryAll(row, valuePath)
 	if err != nil {
 		return "", fmt.Errorf("xpath '%s' is failed: %w", valuePath, err)
 	}
 
-	if value == nil {
+	if values == nil {
 		return "", nil
 	}
+	result := make([]string len(values))
+	for i, value := range values {
+		result[i] = value.InnerText()
+	}
 
-	return value.InnerText(), nil
+	return strings.Join(result, "|"), nil
 }
 
 func loadMapping(path string) (*Mapping, error) {
