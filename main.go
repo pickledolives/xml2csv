@@ -237,7 +237,7 @@ func parseXML(path string) (*xmlquery.Node, error) {
 	}
 	defer reader.Close()
 
-	return xmlquery.ParseWithOptions(r, xmlquery.ParserOptions{
+	return xmlquery.ParseWithOptions(reader, xmlquery.ParserOptions{
 		Decoder: &xmlquery.DecoderOptions{
 			Strict: false,
 		},
